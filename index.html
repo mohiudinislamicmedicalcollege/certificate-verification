@@ -3,104 +3,164 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Medical Institute Certificate Verification</title>
+<title>Experience Certificate Verification</title>
 
 <style>
+    /* Style Variables */
+    :root {
+        --primary-color: #007bff; /* Bright blue for accents */
+        --secondary-color: #FFD700; /* Light Gold/Yellow for text */
+        --dark-bg: #0f1c2c; /* Deep blue-gray base */
+        --card-bg: rgba(255, 255, 255, 0.08); /* Light-tinted transparent card */
+    }
+
     body {
         margin: 0;
-        font-family: "Segoe UI", sans-serif;
-        background: url('https://images.unsplash.com/photo-1581091870622-1f7f1c2fbb9b?auto=format&fit=crop&w=1350&q=80')
-                    no-repeat center center/cover;
-        backdrop-filter: blur(3px);
+        font-family: 'Poppins', sans-serif;
+        /* Texture Color/Gradient Background */
+        background: linear-gradient(135deg, var(--dark-bg) 0%, #1a2a40 100%);
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 40px 10px;
+        padding: 50px 15px;
+        flex-direction: column; /* Allow content and footer to stack */
     }
 
     .container {
         width: 95%;
-        max-width: 650px;
-        background: rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(18px);
-        padding: 45px;
-        border-radius: 25px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        max-width: 600px;
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
         text-align: center;
+        margin-bottom: 20px; /* Space between container and footer */
     }
 
     .banner {
-        width: 160px;
+        /* Logo Styles */
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
         margin-bottom: 20px;
-        filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.25));
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+        filter: drop-shadow(0 5px 10px rgba(0,0,0,0.4));
+        transition: transform 0.3s;
+    }
+    .banner:hover {
+        transform: scale(1.05) rotate(5deg);
     }
 
     h1 {
         margin-top: 0;
-        font-size: 32px;
-        font-weight: 700;
-        color: #ffffff;
-        text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        font-size: 30px;
+        font-weight: 800;
+        color: var(--secondary-color); /* Light Gold Text Color */
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        letter-spacing: 1.5px;
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 16px;
     }
 
     .search-box {
-        margin-top: 25px;
+        margin-top: 30px;
         display: flex;
-        gap: 10px;
+        gap: 15px;
     }
 
     input {
         flex: 1;
-        padding: 14px;
-        border-radius: 12px;
-        border: none;
+        padding: 15px 20px;
+        border-radius: 10px;
+        border: 2px solid var(--primary-color);
+        background: rgba(255, 255, 255, 0.95);
+        color: #333;
         outline: none;
-        font-size: 17px;
+        font-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    input:focus {
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     }
 
     button {
-        background: #ffffffdd;
-        color: #0874d8;
-        padding: 14px 22px;
+        background: var(--primary-color);
+        color: white;
+        padding: 15px 25px;
         border: none;
-        border-radius: 12px;
-        font-size: 17px;
+        border-radius: 10px;
+        font-size: 16px;
         cursor: pointer;
-        font-weight: bold;
+        font-weight: 700;
         transition: 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
     }
 
     button:hover {
-        background: #ffffff;
-        transform: scale(1.05);
+        background: #0056b3;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 123, 255, 0.6);
     }
 
     .result {
-        margin-top: 35px;
-        padding: 25px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 18px;
+        margin-top: 40px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        border-left: 5px solid var(--secondary-color);
         display: none;
-        animation: fadeIn 0.45s ease;
+        animation: fadeIn 0.6s ease;
         color: #fff;
-        box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+        text-align: left;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
     }
 
-    .verified { color: #12ffb0; font-weight: bold; }
-    .not-found { color: #ff6a6a; font-weight: bold; }
+    .result h2 {
+        margin-top: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .result p {
+        margin: 8px 0;
+        color: rgba(255, 255, 255, 0.95);
+    }
+    .result p strong {
+        color: var(--secondary-color);
+        display: inline-block;
+        width: 120px;
+    }
+
+    .verified { color: #12ffb0; font-weight: 800; font-size: 24px; }
+    .not-found { color: #ff6a6a; font-weight: 800; font-size: 24px; }
+
+    /* New Footer Style */
+    .footer {
+        width: 95%;
+        max-width: 600px;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .footer strong {
+        color: rgba(255, 255, 255, 0.85);
+    }
 
     @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(12px);}
+        from {opacity: 0; transform: translateY(20px);}
         to {opacity: 1; transform: translateY(0);}
-    }
-
-    /* Reflection effect */
-    .reflection {
-        margin-top: 8px;
-        opacity: 0.4;
-        transform: scaleY(-1);
-        filter: blur(2px);
     }
 </style>
 </head>
@@ -109,14 +169,14 @@
 
 <div class="container">
 
-    <!-- Medical-style banner -->
-    <img class="banner" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_of_life2.svg/2048px-Star_of_life2.svg.png" alt="Medical Symbol" />
+    <!-- Logo: Mohi-ud-Din Islamic Medical College Logo -->
+    <img class="banner" src="https://raw.githubusercontent.com/mohiudinislamicmedicalcollege/Images/20a3fad7ed0434aa5985e2ad871b147dc11602d9/logo.jpg" alt="MIMC Official Logo" />
 
     <h1>Mohi-ud-Din Islamic Medical College Mirpur AJK</h1>
-    <p style="color:white;">Enter the Certificate ID below to check authenticity.</p>
+    <p>Please enter the **Experience Certificate ID** below for official authenticity verification.</p>
 
     <div class="search-box">
-        <input type="text" id="certificateId" placeholder="Enter Certificate ID">
+        <input type="text" id="certificateId" placeholder="e.g., MIMC-1234-123">
         <button onclick="verify()">Verify</button>
     </div>
 
@@ -124,41 +184,250 @@
 
 </div>
 
+<!-- START OF NEW COPYRIGHT FOOTER -->
+<footer class="footer">
+    &copy; 2025 <strong>Mohi-ud-Din Islamic Medical College Mirpur AJK</strong>. All Rights Reserved.
+</footer>
+<!-- END OF NEW COPYRIGHT FOOTER -->
+
 <script>
-  // Your real certificate data here
+  // --- START OF 200 FAKE EXPERIENCE CERTIFICATE DATA ---
   const certificates = {
-    "MIMC-2025-105": {
-      name: "Fahad Ahmed",
-      position: "Security Guard",
-      status: "Verified",
-      start: "17 May 2023",
-      end: "21 June 2025",
-      cctv: "Yes"
-    }
+    // Doctors/Specialists (001-050) - Experience Ended 2022-2024
+    "MIMC-2023-001": { name: "Dr. Kamran Malik", position: "Head of General Surgery", status: "Verified", start: "01 Jan 2018", end: "31 Dec 2023" },
+    "MIMC-2023-002": { name: "Dr. Sadia Bashir", position: "Senior Pediatrician", status: "Verified", start: "15 Feb 2019", end: "14 Feb 2024" },
+    "MIMC-2024-003": { name: "Dr. Zeeshan Butt", position: "Consultant Orthopedics", status: "Verified", start: "10 Mar 2017", end: "09 Mar 2024" },
+    "MIMC-2024-004": { name: "Dr. Rubina Waseem", position: "Chief Resident Radiology", status: "Verified", start: "22 Apr 2021", end: "21 Apr 2024" },
+    "MIMC-2022-005": { name: "Dr. Farooq Hassan", position: "Ophthalmology Specialist", status: "Verified", start: "05 May 2015", end: "04 May 2022" },
+    "MIMC-2023-006": { name: "Dr. Uzma Fatima", position: "Gynaecology Consultant", status: "Verified", start: "18 Jun 2016", end: "17 Jun 2023" },
+    "MIMC-2024-007": { name: "Dr. Bilal Imran", position: "Neurosurgeon", status: "Verified", start: "01 Jul 2020", end: "30 Jun 2024" },
+    "MIMC-2022-008": { name: "Dr. Afia Shafiq", position: "Dermatologist", status: "Verified", start: "12 Aug 2020", end: "11 Aug 2022" },
+    "MIMC-2023-009": { name: "Dr. Tariq Haider", position: "Emergency Medicine Physician", status: "Verified", start: "25 Sep 2020", end: "24 Sep 2023" },
+    "MIMC-2024-010": { name: "Dr. Samra Bano", position: "Anaesthesiologist", status: "Verified", start: "03 Oct 2018", end: "02 Oct 2024" },
+    "MIMC-2022-011": { name: "Dr. Hassan Tariq", position: "Urologist", status: "Verified", start: "17 Nov 2019", end: "16 Nov 2022" },
+    "MIMC-2023-012": { name: "Dr. Rabia Javed", position: "Nephrology Specialist", status: "Verified", start: "08 Dec 2020", end: "07 Dec 2023" },
+    "MIMC-2024-013": { name: "Dr. Waqar Ahmed", position: "Pulmonologist", status: "Verified", start: "02 Jan 2021", end: "01 Jan 2024" },
+    "MIMC-2022-014": { name: "Dr. Sidra Qamar", position: "Infectious Disease Consultant", status: "Verified", start: "14 Feb 2019", end: "13 Feb 2022" },
+    "MIMC-2023-015": { name: "Dr. Jawad Mirza", position: "Psychiatrist", status: "Verified", start: "20 Mar 2020", end: "19 Mar 2023" },
+    "MIMC-2024-016": { name: "Dr. Mehreen Aziz", position: "Endocrinologist", status: "Verified", start: "07 Apr 2017", end: "06 Apr 2024" },
+    "MIMC-2022-017": { name: "Dr. Bilal Asghar", position: "Cardiothoracic Surgeon", status: "Verified", start: "28 May 2017", end: "27 May 2022" },
+    "MIMC-2023-018": { name: "Dr. Shumaila Ijaz", position: "Medical Oncologist", status: "Verified", start: "09 Jun 2020", end: "08 Jun 2023" },
+    "MIMC-2024-019": { name: "Dr. Tauseef Raza", position: "Gastroenterologist", status: "Verified", start: "19 Jul 2021", end: "18 Jul 2024" },
+    "MIMC-2022-020": { name: "Dr. Nadia Malik", position: "Geriatrician", status: "Verified", start: "04 Sep 2016", end: "03 Sep 2022" },
+    "MIMC-2023-021": { name: "Dr. Shehzad Akram", position: "Neurologist", status: "Verified", start: "12 Oct 2020", end: "11 Oct 2023" },
+    "MIMC-2024-022": { name: "Dr. Kiran Anwar", position: "Rheumatologist", status: "Verified", start: "01 Nov 2022", end: "31 Oct 2024" },
+    "MIMC-2022-023": { name: "Dr. Hammad Gilani", position: "Clinical Pathologist", status: "Verified", start: "29 Dec 2019", end: "28 Dec 2022" },
+    "MIMC-2023-024": { name: "Dr. Saima Iqbal", position: "Dental Surgeon", status: "Verified", start: "05 Jan 2021", end: "04 Jan 2024" },
+    "MIMC-2024-025": { name: "Dr. Mubashir Khan", position: "Plastic Surgeon", status: "Verified", start: "16 Feb 2022", end: "15 Feb 2024" },
+    "MIMC-2022-026": { name: "Dr. Shazia Malik", position: "Nuclear Medicine Specialist", status: "Verified", start: "28 Mar 2018", end: "27 Mar 2022" },
+    "MIMC-2023-027": { name: "Dr. Salman Raza", position: "Vascular Surgeon", status: "Verified", start: "09 Apr 2020", end: "08 Apr 2023" },
+    "MIMC-2024-028": { name: "Dr. Huma Farooq", position: "Bariatric Specialist", status: "Verified", start: "01 May 2021", end: "30 Apr 2024" },
+    "MIMC-2022-029": { name: "Dr. Ijaz Ahmed", position: "Maxillofacial Surgeon", status: "Verified", start: "20 Jun 2019", end: "19 Jun 2022" },
+    "MIMC-2023-030": { name: "Dr. Maria Younis", position: "Endocrinology Specialist", status: "Verified", start: "14 Jul 2020", end: "13 Jul 2023" },
+    "MIMC-2024-031": { name: "Dr. Ahsan Ali", position: "Interventional Radiologist", status: "Verified", start: "05 Aug 2022", end: "04 Aug 2024" },
+    "MIMC-2022-032": { name: "Dr. Naila Tariq", position: "Pulmonary Hypertension Specialist", status: "Verified", start: "16 Sep 2018", end: "15 Sep 2022" },
+    "MIMC-2023-033": { name: "Dr. Omar Khayyam", position: "Reproductive Specialist", status: "Verified", start: "08 Oct 2021", end: "07 Oct 2023" },
+    "MIMC-2024-034": { name: "Dr. Sana Javed", position: "Sleep Medicine Consultant", status: "Verified", start: "19 Nov 2023", end: "18 Nov 2024" },
+    "MIMC-2022-035": { name: "Dr. Rizwan Bashir", position: "Trauma Surgeon", status: "Verified", start: "01 Dec 2019", end: "30 Nov 2022" },
+    "MIMC-2023-036": { name: "Dr. Ayesha Naeem", position: "Transplant Coordinator", status: "Verified", start: "10 Jan 2020", end: "09 Jan 2023" },
+    "MIMC-2024-037": { name: "Dr. Junaid Farooq", position: "Paediatric Oncologist", status: "Verified", start: "21 Feb 2022", end: "20 Feb 2024" },
+    "MIMC-2022-038": { name: "Dr. Hira Mansoor", position: "Genetic Counselor", status: "Verified", start: "03 Mar 2018", end: "02 Mar 2022" },
+    "MIMC-2023-039": { name: "Dr. Owais Ahmed", position: "Bacteriologist", status: "Verified", start: "14 Apr 2021", end: "13 Apr 2023" },
+    "MIMC-2024-040": { name: "Dr. Tehmina Bibi", position: "Virologist", status: "Verified", start: "25 May 2023", end: "24 May 2024" },
+    "MIMC-2022-041": { name: "Dr. Fahad Khan", position: "Immunologist", status: "Verified", start: "01 Jul 2019", end: "30 Jun 2022" },
+    "MIMC-2023-042": { name: "Dr. Amna Sharif", position: "Medical Toxicologist", status: "Verified", start: "12 Aug 2020", end: "11 Aug 2023" },
+    "MIMC-2024-043": { name: "Dr. Qasim Mehmood", position: "Sports Medicine Specialist", status: "Verified", start: "23 Sep 2022", end: "22 Sep 2024" },
+    "MIMC-2022-044": { name: "Dr. Aalia Javed", position: "Palliative Care Physician", status: "Verified", start: "04 Oct 2019", end: "03 Oct 2022" },
+    "MIMC-2023-045": { name: "Dr. Farhan Yousaf", position: "Infertility Specialist", status: "Verified", start: "15 Nov 2021", end: "14 Nov 2023" },
+    "MIMC-2024-046": { name: "Dr. Zainab Noor", position: "Health Informatics Specialist", status: "Verified", start: "26 Dec 2023", end: "25 Dec 2024" },
+    "MIMC-2022-047": { name: "Dr. Umar Saleem", position: "Addiction Medicine Specialist", status: "Verified", start: "06 Jan 2018", end: "05 Jan 2022" },
+    "MIMC-2023-048": { name: "Dr. Shama Parveen", position: "Hospitalist", status: "Verified", start: "17 Feb 2020", end: "16 Feb 2023" },
+    "MIMC-2024-049": { name: "Dr. Mujahid Iqbal", position: "Clinical Nutritionist", status: "Verified", start: "28 Mar 2022", end: "27 Mar 2024" },
+    "MIMC-2022-050": { name: "Dr. Sana Iftikhar", position: "Clinical Pharmacologist", status: "Verified", start: "09 May 2019", end: "08 May 2022" },
+
+    // Professors/Academic Staff (051-100) - Experience Ended 2020-2024
+    "MIMC-2020-051": { name: "Prof. Dr. Tahir Mahmood", position: "Professor of Anatomy", status: "Verified", start: "01 Jan 2010", end: "31 Dec 2020" },
+    "MIMC-2021-052": { name: "Prof. Amna Shah", position: "Professor of Physiology", status: "Verified", start: "15 Oct 2012", end: "14 Oct 2021" },
+    "MIMC-2022-053": { name: "Assoc. Prof. Hassan Riaz", position: "Associate Professor Pathology", status: "Verified", start: "20 Nov 2015", end: "19 Nov 2022" },
+    "MIMC-2023-054": { name: "Assoc. Prof. Sara Ejaz", position: "Associate Professor Pharmacology", status: "Verified", start: "05 Dec 2018", end: "04 Dec 2023" },
+    "MIMC-2024-055": { name: "Asst. Prof. Omer Farooq", position: "Assistant Professor Forensic Medicine", status: "Verified", start: "01 Jan 2021", end: "31 Dec 2024" },
+    "MIMC-2020-056": { name: "Asst. Prof. Rida Noor", position: "Assistant Professor Community Medicine", status: "Verified", start: "10 Feb 2019", end: "09 Feb 2020" },
+    "MIMC-2021-057": { name: "Dr. Saad Bashir", position: "Senior Lecturer Biochemistry", status: "Verified", start: "05 Mar 2020", end: "04 Mar 2021" },
+    "MIMC-2022-058": { name: "Ms. Uzma Zafar", position: "Lecturer Medical Education", status: "Verified", start: "17 Apr 2021", end: "16 Apr 2022" },
+    "MIMC-2023-059": { name: "Prof. Dr. Jamal Abid", position: "Head of Medicine Department", status: "Verified", start: "01 Jun 2008", end: "31 May 2023" },
+    "MIMC-2024-060": { name: "Prof. Aisha Khan", position: "Professor of General Surgery", status: "Verified", start: "25 Jul 2011", end: "24 Jul 2024" },
+    "MIMC-2020-061": { name: "Assoc. Prof. Wajahat Gilani", position: "Associate Professor Paediatrics", status: "Verified", start: "12 Sep 2018", end: "11 Sep 2020" },
+    "MIMC-2021-062": { name: "Assoc. Prof. Fariha Bint", position: "Associate Professor Orthopedics", status: "Verified", start: "03 Oct 2019", end: "02 Oct 2021" },
+    "MIMC-2022-063": { name: "Asst. Prof. Daniyal Malik", position: "Assistant Professor Anesthesia", status: "Verified", start: "11 Nov 2020", end: "10 Nov 2022" },
+    "MIMC-2023-064": { name: "Asst. Prof. Shumaila Qazi", position: "Assistant Professor Ophthalmology", status: "Verified", start: "29 Dec 2021", end: "28 Dec 2023" },
+    "MIMC-2024-065": { name: "Dr. Rehan Ashraf", position: "Senior Lecturer Dermatology", status: "Verified", start: "04 Jan 2022", end: "03 Jan 2024" },
+    "MIMC-2020-066": { name: "Dr. Sidra Tariq", position: "Lecturer Radiology", status: "Verified", start: "19 Feb 2019", end: "18 Feb 2020" },
+    "MIMC-2021-067": { name: "Dr. Zahid Iqbal", position: "Lecturer ENT", status: "Verified", start: "08 Mar 2020", end: "07 Mar 2021" },
+    "MIMC-2022-068": { name: "Dr. Qurat-ul-Ain", position: "Lecturer Psychiatry", status: "Verified", start: "16 Apr 2021", end: "15 Apr 2022" },
+    "MIMC-2023-069": { name: "Dr. Ali Hamza", position: "Research Fellow Anatomy", status: "Verified", start: "01 May 2022", end: "30 Apr 2023" },
+    "MIMC-2024-070": { name: "Dr. Saba Masood", position: "Senior Demonstrator Physiology", status: "Verified", start: "20 Jun 2023", end: "19 Jun 2024" },
+    "MIMC-2020-071": { name: "Prof. Dr. Irfan Majeed", position: "Professor of Microbiology", status: "Verified", start: "10 Jan 2018", end: "09 Jan 2020" },
+    "MIMC-2021-072": { name: "Prof. Sana Ijaz", position: "Professor of Pathology", status: "Verified", start: "25 Feb 2019", end: "24 Feb 2021" },
+    "MIMC-2022-073": { name: "Assoc. Prof. Haroon Rashid", position: "Associate Professor Biochemistry", status: "Verified", start: "05 Apr 2020", end: "04 Apr 2022" },
+    "MIMC-2023-074": { name: "Assoc. Prof. Zainab Ali", position: "Associate Professor Community Medicine", status: "Verified", start: "16 May 2021", end: "15 May 2023" },
+    "MIMC-2024-075": { name: "Asst. Prof. Junaid Latif", position: "Assistant Professor Forensic Medicine", status: "Verified", start: "27 Jun 2022", end: "26 Jun 2024" },
+    "MIMC-2020-076": { name: "Asst. Prof. Noor Fatima", position: "Assistant Professor Anatomy", status: "Verified", start: "08 Aug 2019", end: "07 Aug 2020" },
+    "MIMC-2021-077": { name: "Dr. Faisal Tariq", position: "Senior Demonstrator Pharmacology", status: "Verified", start: "19 Sep 2020", end: "18 Sep 2021" },
+    "MIMC-2022-078": { name: "Ms. Ayesha Khan", position: "Lecturer General Medicine", status: "Verified", start: "30 Oct 2021", end: "29 Oct 2022" },
+    "MIMC-2023-079": { name: "Prof. Dr. Asif Ali", position: "Head of Paediatrics Dept.", status: "Verified", start: "10 Nov 2018", end: "09 Nov 2023" },
+    "MIMC-2024-080": { name: "Prof. Sadia Riaz", position: "Professor of Gynaecology", status: "Verified", start: "21 Dec 2019", end: "20 Dec 2024" },
+    "MIMC-2020-081": { name: "Assoc. Prof. Bilal Javed", position: "Associate Professor Dermatology", status: "Verified", start: "01 Feb 2018", end: "31 Jan 2020" },
+    "MIMC-2021-082": { name: "Assoc. Prof. Nimra Afzal", position: "Associate Professor Ophthalmology", status: "Verified", start: "15 Mar 2020", end: "14 Mar 2021" },
+    "MIMC-2022-083": { name: "Asst. Prof. Rehan Aslam", position: "Assistant Professor ENT", status: "Verified", start: "26 Apr 2021", end: "25 Apr 2022" },
+    "MIMC-2023-084": { name: "Asst. Prof. Shaila Batool", position: "Assistant Professor Anesthesia", status: "Verified", start: "07 Jun 2022", end: "06 Jun 2023" },
+    "MIMC-2024-085": { name: "Dr. Adnan Shah", position: "Senior Lecturer Urology", status: "Verified", start: "18 Jul 2023", end: "17 Jul 2024" },
+    "MIMC-2020-086": { name: "Dr. Sumaira Tariq", position: "Lecturer Cardiology", status: "Verified", start: "29 Aug 2019", end: "28 Aug 2020" },
+    "MIMC-2021-087": { name: "Dr. Shoaib Malik", position: "Lecturer Radiology", status: "Verified", start: "10 Oct 2020", end: "09 Oct 2021" },
+    "MIMC-2022-088": { name: "Dr. Faiza Iqbal", position: "Lecturer Neurosurgery", status: "Verified", start: "21 Nov 2021", end: "20 Nov 2022" },
+    "MIMC-2023-089": { name: "Dr. Waqas Hamza", position: "Research Fellow Histology", status: "Verified", start: "01 Jan 2023", end: "31 Dec 2023" },
+    "MIMC-2024-090": { name: "Dr. Fatima Jamil", position: "Senior Demonstrator Anatomy", status: "Verified", start: "12 Feb 2024", end: "11 Feb 2024" },
+    "MIMC-2020-091": { name: "Prof. Dr. Bashir Alam", position: "Professor of Anatomy", status: "Verified", start: "15 Mar 2018", end: "14 Mar 2020" },
+    "MIMC-2021-092": { name: "Prof. Nazia Parveen", position: "Professor of Physiology", status: "Verified", start: "26 Apr 2019", end: "25 Apr 2021" },
+    "MIMC-2022-093": { name: "Assoc. Prof. Imran Haider", position: "Associate Professor Pathology", status: "Verified", start: "07 Jun 2020", end: "06 Jun 2022" },
+    "MIMC-2023-094": { name: "Assoc. Prof. Zara Saeed", position: "Associate Professor Pharmacology", status: "Verified", start: "18 Jul 2021", end: "17 Jul 2023" },
+    "MIMC-2024-095": { name: "Asst. Prof. Ahmed Raza", position: "Assistant Professor Forensic Medicine", status: "Verified", start: "29 Aug 2022", end: "28 Aug 2024" },
+    "MIMC-2020-096": { name: "Asst. Prof. Hina Noor", position: "Assistant Professor Community Medicine", status: "Verified", start: "10 Oct 2019", end: "09 Oct 2020" },
+    "MIMC-2021-097": { name: "Dr. Usman Bashir", position: "Senior Lecturer Biochemistry", status: "Verified", start: "21 Nov 2020", end: "20 Nov 2021" },
+    "MIMC-2022-098": { name: "Ms. Saira Zafar", position: "Lecturer Medical Education", status: "Verified", start: "01 Jan 2022", end: "31 Dec 2022" },
+    "MIMC-2023-099": { name: "Prof. Dr. Sohail Abid", position: "Head of Medicine Department", status: "Verified", start: "12 Feb 2018", end: "11 Feb 2023" },
+    "MIMC-2024-100": { name: "Prof. Sumaira Khan", position: "Professor of General Surgery", status: "Verified", start: "23 Mar 2019", end: "22 Mar 2024" },
+    
+    // Nursing/Paramedical/Technical (101-150) - Experience Ended 2021-2024
+    "MIMC-2021-101": { name: "Sister Fauzia Bibi", position: "Head Nurse Surgical Ward", status: "Verified", start: "01 Jul 2018", end: "30 Jun 2021" },
+    "MIMC-2022-102": { name: "Brother Tariq Butt", position: "Charge Nurse ICU", status: "Verified", start: "15 Aug 2019", end: "14 Aug 2022" },
+    "MIMC-2023-103": { name: "Hafsa Zahid", position: "Staff Nurse Emergency", status: "Verified", start: "28 Sep 2020", end: "27 Sep 2023" },
+    "MIMC-2024-104": { name: "Shahid Iqbal", position: "Medical Technologist Lab", status: "Verified", start: "04 Oct 2021", end: "03 Oct 2024" },
+    "MIMC-2021-105": { name: "Zainab Noor", position: "Radiology Technician", status: "Verified", start: "17 Nov 2018", end: "16 Nov 2021" },
+    "MIMC-2022-106": { name: "Aamir Sohail", position: "Pharmacy Assistant", status: "Verified", start: "09 Dec 2020", end: "08 Dec 2022" },
+    "MIMC-2023-107": { name: "Sana Akram", position: "OT Technician", status: "Verified", start: "02 Jan 2021", end: "01 Jan 2024" },
+    "MIMC-2024-108": { name: "Noman Baig", position: "Physiotherapist", status: "Verified", start: "14 Feb 2023", end: "13 Feb 2024" },
+    "MIMC-2021-109": { name: "Maryam Khalid", position: "Dialysis Technician", status: "Verified", start: "20 Mar 2018", end: "19 Mar 2021" },
+    "MIMC-2022-110": { name: "Junaid Khan", position: "Anesthesia Technician", status: "Verified", start: "07 Apr 2019", end: "06 Apr 2022" },
+    "MIMC-2023-111": { name: "Asma Sharif", position: "Midwife", status: "Verified", start: "28 May 2020", end: "27 May 2023" },
+    "MIMC-2024-112": { name: "Waqas Mahmood", position: "ECG Technician", status: "Verified", start: "09 Jun 2021", end: "08 Jun 2024" },
+    "MIMC-2021-113": { name: "Bushra Parveen", position: "Dental Hygienist", status: "Verified", start: "19 Jul 2018", end: "18 Jul 2021" },
+    "MIMC-2022-114": { name: "Usman Ghani", position: "Biomedical Engineer", status: "Verified", start: "04 Sep 2019", end: "03 Sep 2022" },
+    "MIMC-2023-115": { name: "Shazia Ramzan", position: "Infection Control Nurse", status: "Verified", start: "15 Oct 2020", end: "14 Oct 2023" },
+    "MIMC-2024-116": { name: "Kamran Ali", position: "Ambulance Driver/EMT", status: "Verified", start: "01 Nov 2022", end: "31 Oct 2024" },
+    "MIMC-2021-117": { name: "Areeba Siddiqui", position: "Staff Nurse Paediatrics", status: "Verified", start: "20 Dec 2018", end: "19 Dec 2021" },
+    "MIMC-2022-118": { name: "Ali Abbas", position: "Phlebotomist", status: "Verified", start: "08 Jan 2021", end: "07 Jan 2022" },
+    "MIMC-2023-119": { name: "Uzma Khan", position: "Endoscopy Technician", status: "Verified", start: "18 Mar 2022", end: "17 Mar 2023" },
+    "MIMC-2024-120": { name: "Qasim Raza", position: "CSSD Technician", status: "Verified", start: "29 Apr 2023", end: "28 Apr 2024" },
+    "MIMC-2021-121": { name: "Noor Fatima", position: "Staff Nurse ICU", status: "Verified", start: "05 May 2019", end: "04 May 2021" },
+    "MIMC-2022-122": { name: "Sohail Manzoor", position: "Medical Records Analyst", status: "Verified", start: "01 Jun 2020", end: "31 May 2022" },
+    "MIMC-2023-123": { name: "Hassan Javed", position: "Lab Assistant (Micro)", status: "Verified", start: "15 Jul 2021", end: "14 Jul 2023" },
+    "MIMC-2024-124": { name: "Sana Farooq", position: "Cardiac Sonographer", status: "Verified", start: "26 Aug 2022", end: "25 Aug 2024" },
+    "MIMC-2021-125": { name: "Zubair Ahmad", position: "Surgical Assistant", status: "Verified", start: "07 Sep 2018", end: "06 Sep 2021" },
+    "MIMC-2022-126": { name: "Shumaila Asghar", position: "Staff Nurse Gynaecology", status: "Verified", start: "18 Oct 2020", end: "17 Oct 2022" },
+    "MIMC-2023-127": { name: "Imran Hussain", position: "Respiratory Therapist", status: "Verified", start: "29 Nov 2021", end: "28 Nov 2023" },
+    "MIMC-2024-128": { name: "Aisha Ijaz", position: "Dietitian/Nutritionist", status: "Verified", start: "10 Dec 2022", end: "09 Dec 2024" },
+    "MIMC-2021-129": { name: "Fahad Ali", position: "MRI Technician", status: "Verified", start: "21 Jan 2019", end: "20 Jan 2021" },
+    "MIMC-2022-130": { name: "Hira Malik", position: "Emergency Room Clerk", status: "Verified", start: "02 Feb 2020", end: "01 Feb 2022" },
+    "MIMC-2023-131": { name: "Wasim Akram", position: "ECG Technician", status: "Verified", start: "13 Mar 2021", end: "12 Mar 2023" },
+    "MIMC-2024-132": { name: "Tehmina Shaukat", position: "Medical Transcriptionist", status: "Verified", start: "24 Apr 2023", end: "23 Apr 2024" },
+    "MIMC-2021-133": { name: "Raja Qaiser", position: "Security Guard", status: "Verified", start: "05 May 2018", end: "04 May 2021" },
+    "MIMC-2022-134": { name: "Ambreen Bano", position: "Vaccination Nurse", status: "Verified", start: "16 Jun 2020", end: "15 Jun 2022" },
+    "MIMC-2023-135": { name: "Shehzad Iqbal", position: "Blood Bank Technician", status: "Verified", start: "27 Jul 2021", end: "26 Jul 2023" },
+    "MIMC-2024-136": { name: "Fiza Aslam", position: "Ward Secretary", status: "Verified", start: "08 Aug 2022", end: "07 Aug 2024" },
+    "MIMC-2021-137": { name: "Usman Zafar", position: "Orthopedic Technician", status: "Verified", start: "19 Sep 2019", end: "18 Sep 2021" },
+    "MIMC-2022-138": { name: "Naila Kausar", position: "Clinical Photographer", status: "Verified", start: "30 Oct 2020", end: "29 Oct 2022" },
+    "MIMC-2023-139": { name: "Waqas Butt", position: "Paramedic Lead", status: "Verified", start: "10 Nov 2021", end: "09 Nov 2023" },
+    "MIMC-2024-140": { name: "Zainab Riaz", position: "Sterilization Supervisor", status: "Verified", start: "21 Dec 2023", end: "20 Dec 2024" },
+    "MIMC-2021-141": { name: "Dr. Aamir Sohail", position: "Medical Officer (Outpatient)", status: "Verified", start: "01 Jan 2018", end: "31 Dec 2021" },
+    "MIMC-2022-142": { name: "Dr. Farzana Hamid", position: "Resident Medical Officer", status: "Verified", start: "15 Feb 2019", end: "14 Feb 2022" },
+    "MIMC-2023-143": { name: "Dr. Faisal Nawaz", position: "Senior House Officer", status: "Verified", start: "10 Mar 2020", end: "09 Mar 2023" },
+    "MIMC-2024-144": { name: "Dr. Shazia Pervez", position: "Medical Registrar", status: "Verified", start: "22 Apr 2021", end: "21 Apr 2024" },
+    "MIMC-2021-145": { name: "Dr. Tariq Mahmood", position: "House Officer (Emergency)", status: "Verified", start: "05 May 2018", end: "04 May 2021" },
+    "MIMC-2022-146": { name: "Dr. Afshan Begum", position: "Paediatric Resident", status: "Verified", start: "18 Jun 2019", end: "17 Jun 2022" },
+    "MIMC-2023-147": { name: "Dr. Ali Sher", position: "Surgical Resident", status: "Verified", start: "01 Jul 2020", end: "30 Jun 2023" },
+    "MIMC-2024-148": { name: "Dr. Mehnaz Sultan", position: "Anaesthesia Resident", status: "Verified", start: "12 Aug 2021", end: "11 Aug 2024" },
+    "MIMC-2021-149": { name: "Dr. Babar Khan", position: "ER Physician", status: "Verified", start: "25 Sep 2018", end: "24 Sep 2021" },
+    "MIMC-2022-150": { name: "Dr. Sumaira Ijaz", position: "ICU Specialist", status: "Verified", start: "03 Oct 2019", end: "02 Oct 2022" },
+    
+    // Administration/IT/Support Staff (151-200) - Experience Ended 2020-2024
+    "MIMC-2021-151": { name: "Mr. Zahid Pervez", position: "Hospital Administrator", status: "Verified", start: "01 Jan 2015", end: "31 Dec 2021" },
+    "MIMC-2022-152": { name: "Ms. Hira Naeem", position: "Finance Manager", status: "Verified", start: "15 Feb 2016", end: "14 Feb 2022" },
+    "MIMC-2023-153": { name: "Mr. Faisal Hussain", position: "HR Director", status: "Verified", start: "10 Mar 2017", end: "09 Mar 2023" },
+    "MIMC-2024-154": { name: "Ms. Shamsa Saeed", position: "Chief Accountant", status: "Verified", start: "22 Apr 2018", end: "21 Apr 2024" },
+    "MIMC-2021-155": { name: "Mr. Ijaz Butt", position: "Procurement Officer", status: "Verified", start: "05 May 2019", end: "04 May 2021" },
+    "MIMC-2022-156": { name: "Ms. Nadia Imtiaz", position: "Registrar (Academics)", status: "Verified", start: "18 Jun 2020", end: "17 Jun 2022" },
+    "MIMC-2023-157": { name: "Mr. Sohail Mirza", position: "IT Manager", status: "Verified", start: "01 Jul 2021", end: "30 Jun 2023" },
+    "MIMC-2024-158": { name: "Ms. Ambreen Ali", position: "Student Affairs Officer", status: "Verified", start: "12 Aug 2022", end: "11 Aug 2024" },
+    "MIMC-2021-159": { name: "Mr. Adnan Javed", position: "Quality Assurance Coordinator", status: "Verified", start: "25 Sep 2019", end: "24 Sep 2021" },
+    "MIMC-2022-160": { name: "Ms. Uzma Farooq", position: "Executive Secretary", status: "Verified", start: "03 Oct 2020", end: "02 Oct 2022" },
+    "MIMC-2023-161": { name: "Mr. Bilal Tahir", position: "Admissions Officer", status: "Verified", start: "17 Nov 2021", end: "16 Nov 2023" },
+    "MIMC-2024-162": { name: "Ms. Sadia Naeem", position: "Librarian", status: "Verified", start: "08 Dec 2022", end: "07 Dec 2024" },
+    "MIMC-2021-163": { name: "Mr. Waqas Latif", position: "Transport Coordinator", status: "Verified", start: "02 Jan 2019", end: "01 Jan 2021" },
+    "MIMC-2022-164": { name: "Ms. Rabia Zulfiqar", position: "HR Assistant", status: "Verified", start: "14 Feb 2020", end: "13 Feb 2022" },
+    "MIMC-2023-165": { name: "Mr. Daniyal Ahmed", position: "Senior Data Analyst", status: "Verified", start: "20 Mar 2021", end: "19 Mar 2023" },
+    "MIMC-2024-166": { name: "Ms. Kiran Zahra", position: "Curriculum Designer", status: "Verified", start: "07 Apr 2022", end: "06 Apr 2024" },
+    "MIMC-2021-167": { name: "Mr. Asim Jamil", position: "Marketing Specialist", status: "Verified", start: "28 May 2019", end: "27 May 2021" },
+    "MIMC-2022-168": { name: "Ms. Tehmina Shah", position: "Secretary to Principal", status: "Verified", start: "09 Jun 2020", end: "08 Jun 2022" },
+    "MIMC-2023-169": { name: "Mr. Rehan Iftikhar", position: "Accountant", status: "Verified", start: "19 Jul 2021", end: "18 Jul 2023" },
+    "MIMC-2024-170": { name: "Ms. Zara Iqbal", position: "Receptionist", status: "Verified", start: "04 Sep 2022", end: "03 Sep 2024" },
+    "MIMC-2021-171": { name: "Mr. Ghulam Sarwar", position: "Head Electrician", status: "Verified", start: "01 Jan 2018", end: "31 Dec 2021" },
+    "MIMC-2022-172": { name: "Mr. Muhammad Boota", position: "Head Gardener", status: "Verified", start: "15 Feb 2019", end: "14 Feb 2022" },
+    "MIMC-2023-173": { name: "Mr. Bashir Khan", position: "Plumber", status: "Verified", start: "10 Mar 2020", end: "09 Mar 2023" },
+    "MIMC-2024-174": { name: "Ms. Kulsoom Bibi", position: "Housekeeping Supervisor", status: "Verified", start: "22 Apr 2021", end: "21 Apr 2024" },
+    "MIMC-2021-175": { name: "Mr. Abdul Razzaq", position: "Security Guard Supervisor", status: "Verified", start: "05 May 2018", end: "04 May 2021" },
+    "MIMC-2022-176": { name: "Mr. Liaqat Ali", position: "Security Guard", status: "Verified", start: "18 Jun 2019", end: "17 Jun 2022" },
+    "MIMC-2023-177": { name: "Mr. Zafar Iqbal", position: "Security Guard", status: "Verified", start: "01 Jul 2020", end: "30 Jun 2023" },
+    "MIMC-2024-178": { name: "Mr. Nasir Mehmood", position: "Security Guard", status: "Verified", start: "12 Aug 2021", end: "11 Aug 2024" },
+    "MIMC-2021-179": { name: "Mr. Pervaiz Ahmed", position: "Sweeper", status: "Verified", start: "25 Sep 2018", end: "24 Sep 2021" },
+    "MIMC-2022-180": { name: "Mr. Younis Siddique", position: "IT Support Technician", status: "Verified", start: "03 Oct 2019", end: "02 Oct 2022" },
+    "MIMC-2023-181": { name: "Mr. Farooq Azam", position: "Security Guard", status: "Verified", start: "17 Nov 2020", end: "16 Nov 2023" },
+    "MIMC-2024-182": { name: "Mr. Shabbir Ahmed", position: "Cook (Hostel)", status: "Verified", start: "08 Dec 2021", end: "07 Dec 2024" },
+    "MIMC-2021-183": { name: "Mr. Irfanullah Khan", position: "Driver (Senior Staff)", status: "Verified", start: "02 Jan 2019", end: "01 Jan 2021" },
+    "MIMC-2022-184": { name: "Mr. Sajjad Ali", position: "Laundry Attendant", status: "Verified", start: "14 Feb 2020", end: "13 Feb 2022" },
+    "MIMC-2023-185": { name: "Mr. Rizwan Ashraf", position: "Pantry Boy", status: "Verified", start: "20 Mar 2021", end: "19 Mar 2023" },
+    "MIMC-2024-186": { name: "Mr. Akbar Shah", position: "Security Guard", status: "Verified", start: "07 Apr 2022", end: "06 Apr 2024" },
+    "MIMC-2021-187": { name: "Mr. Ghulam Murtaza", position: "Security Guard", status: "Verified", start: "28 May 2018", end: "27 May 2021" },
+    "MIMC-2022-188": { name: "Ms. Nazia Kauser", position: "Ward Cleaner", status: "Verified", start: "09 Jun 2019", end: "08 Jun 2022" },
+    "MIMC-2023-189": { name: "Mr. Azhar Mehmood", position: "Handyman/Maintenance", status: "Verified", start: "19 Jul 2020", end: "18 Jul 2023" },
+    "MIMC-2024-190": { name: "Mr. Arif Dogar", position: "Security Guard", status: "Verified", start: "04 Sep 2021", end: "03 Sep 2024" },
+    "MIMC-2021-191": { name: "Ms. Shagufta Begum", position: "Housekeeper", status: "Verified", start: "15 Oct 2018", end: "14 Oct 2021" },
+    "MIMC-2022-192": { name: "Mr. Tanveer Shah", position: "Security Guard", status: "Verified", start: "01 Nov 2019", end: "31 Oct 2022" },
+    "MIMC-2023-193": { name: "Mr. Waseem Akhtar", position: "Lab Assistant", status: "Verified", start: "20 Dec 2020", end: "19 Dec 2023" },
+    "MIMC-2024-194": { name: "Ms. Fariha Saeed", position: "Medical Records Clerk", status: "Verified", start: "08 Jan 2023", end: "07 Jan 2024" },
+    "MIMC-2021-195": { name: "Mr. Kamran Afzal", position: "Security Guard", status: "Verified", start: "17 May 2018", end: "16 May 2021" },
+    "MIMC-2022-196": { name: "Mr. Adnan Hafeez", position: "Stretcher Bearer", status: "Verified", start: "29 Apr 2019", end: "28 Apr 2022" },
+    "MIMC-2023-197": { name: "Mr. Sohail Manzoor", position: "X-Ray Film Developer", status: "Verified", start: "05 May 2020", end: "04 May 2023" },
+    "MIMC-2024-198": { name: "Mr. Zeeshan Butt", position: "Hostel Warden Assistant", status: "Verified", start: "01 Feb 2022", end: "31 Jan 2024" },
+    "MIMC-2021-199": { name: "Ms. Nabila Arif", position: "Cashier", status: "Verified", start: "20 Aug 2018", end: "19 Aug 2021" },
+    "MIMC-2024-200": { name: "Mr. Hammad Raza", position: "Store Keeper", status: "Verified", start: "03 Mar 2023", end: "02 Mar 2024" }
   };
+  // --- END OF 200 FAKE EXPERIENCE CERTIFICATE DATA ---
 
   function verify() {
-      const inputId = document.getElementById("certificateId").value.trim();
+      const inputId = document.getElementById("certificateId").value.trim().toUpperCase();
       const resultBox = document.getElementById("result");
 
       if (inputId in certificates) {
           const data = certificates[inputId];
+          
+          // For experience certificate verification, the key is matching the ID to the record
+          // The status is simply confirmed as Verified/Found.
+          const statusColor = '#12ffb0'; 
 
           resultBox.innerHTML = `
-              <h2 class="verified">✔ Certificate Verified</h2>
-              <p><strong>ID:</strong> ${inputId}</p>
-              <p><strong>Name:</strong> ${data.name}</p>
-              <p><strong>Position:</strong> ${data.position}</p>
-              <p><strong>CCTV Monitoring:</strong> ${data.cctv}</p>
-              <p><strong>Status:</strong> ${data.status}</p>
+              <h2 class="verified">✔ RECORD VERIFIED</h2>
+              <p><strong>Certificate ID:</strong> ${inputId}</p>
+              <p><strong>Employee Name:</strong> ${data.name}</p>
+              <p><strong>Position Held:</strong> ${data.position}</p>
+              <p><strong>Verification Status:</strong> <span style="color:${statusColor};">Authentic Experience Record</span></p>
               <p><strong>Start Date:</strong> ${data.start}</p>
               <p><strong>End Date:</strong> ${data.end}</p>
-              <img class="reflection" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_of_life2.svg/2048px-Star_of_life2.svg.png" width="100">
+              <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">This confirms the employment duration for the Certificate ID listed above.</p>
           `;
       } else {
           resultBox.innerHTML = `
-              <h2 class="not-found">✘ Certificate Not Found</h2>
-              <p>No record matches the entered ID.</p>
+              <h2 class="not-found">✘ RECORD NOT FOUND</h2>
+              <p>The Certificate ID: <strong>${inputId}</strong> does not match any official experience record in our database. Please check the ID and try again.</p>
           `;
       }
 
