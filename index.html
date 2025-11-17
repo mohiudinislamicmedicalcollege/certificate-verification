@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Medical Institute Certificate Verification</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: url('https://images.unsplash.com/photo-1581091870622-1f7f1c2fbb9b?auto=format&fit=crop&w=1350&q=80')
+                    no-repeat center center/cover;
+        backdrop-filter: blur(3px);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 10px;
+    }
+
+    .container {
+        width: 95%;
+        max-width: 650px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(18px);
+        padding: 45px;
+        border-radius: 25px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        text-align: center;
+    }
+
+    .banner {
+        width: 160px;
+        margin-bottom: 20px;
+        filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.25));
+    }
+
+    h1 {
+        margin-top: 0;
+        font-size: 32px;
+        font-weight: 700;
+        color: #ffffff;
+        text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    }
+
+    .search-box {
+        margin-top: 25px;
+        display: flex;
+        gap: 10px;
+    }
+
+    input {
+        flex: 1;
+        padding: 14px;
+        border-radius: 12px;
+        border: none;
+        outline: none;
+        font-size: 17px;
+    }
+
+    button {
+        background: #ffffffdd;
+        color: #0874d8;
+        padding: 14px 22px;
+        border: none;
+        border-radius: 12px;
+        font-size: 17px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #ffffff;
+        transform: scale(1.05);
+    }
+
+    .result {
+        margin-top: 35px;
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 18px;
+        display: none;
+        animation: fadeIn 0.45s ease;
+        color: #fff;
+        box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .verified { color: #12ffb0; font-weight: bold; }
+    .not-found { color: #ff6a6a; font-weight: bold; }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(12px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Reflection effect */
+    .reflection {
+        margin-top: 8px;
+        opacity: 0.4;
+        transform: scaleY(-1);
+        filter: blur(2px);
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Medical-style banner -->
+    <img class="banner" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_of_life2.svg/2048px-Star_of_life2.svg.png" alt="Medical Symbol" />
+
+    <h1>Mohi-ud-Din Islamic Medical College Mirpur AJK</h1>
+    <p style="color:white;">Enter the Certificate ID below to check authenticity.</p>
+
+    <div class="search-box">
+        <input type="text" id="certificateId" placeholder="Enter Certificate ID">
+        <button onclick="verify()">Verify</button>
+    </div>
+
+    <div id="result" class="result"></div>
+
+</div>
+
+<script>
+  // Your real certificate data here
+  const certificates = {
+    "MIMC-2025-105": {
+      name: "Fahad Ahmed",
+      position: "Security Guard",
+      status: "Verified",
+      start: "17 May 2023",
+      end: "21 June 2025",
+      cctv: "Yes"
+    }
+  };
+
+  function verify() {
+      const inputId = document.getElementById("certificateId").value.trim();
+      const resultBox = document.getElementById("result");
+
+      if (inputId in certificates) {
+          const data = certificates[inputId];
+
+          resultBox.innerHTML = `
+              <h2 class="verified">✔ Certificate Verified</h2>
+              <p><strong>ID:</strong> ${inputId}</p>
+              <p><strong>Name:</strong> ${data.name}</p>
+              <p><strong>Position:</strong> ${data.position}</p>
+              <p><strong>CCTV Monitoring:</strong> ${data.cctv}</p>
+              <p><strong>Status:</strong> ${data.status}</p>
+              <p><strong>Start Date:</strong> ${data.start}</p>
+              <p><strong>End Date:</strong> ${data.end}</p>
+              <img class="reflection" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_of_life2.svg/2048px-Star_of_life2.svg.png" width="100">
+          `;
+      } else {
+          resultBox.innerHTML = `
+              <h2 class="not-found">✘ Certificate Not Found</h2>
+              <p>No record matches the entered ID.</p>
+          `;
+      }
+
+      resultBox.style.display = "block";
+  }
+</script>
+
+</body>
+</html>
